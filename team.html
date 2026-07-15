@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>团队简介</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #64748b;
+      --paper: rgba(255, 255, 255, 0.9);
+      --line: rgba(31, 41, 51, 0.14);
+      --teal: #1f7a76;
+      --coral: #d86b4c;
+      --blue: #2f5f9f;
+      --shadow: 0 18px 45px rgba(31, 41, 51, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.7;
+      background:
+        linear-gradient(135deg, rgba(229, 247, 244, 0.95), rgba(246, 248, 252, 0.96) 45%, rgba(255, 237, 228, 0.95)),
+        #f4f7f6;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 64px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 32px;
+      padding: 0 6px;
+    }
+
+    .eyebrow {
+      margin: 0;
+      color: var(--teal);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .intro {
+      max-width: 780px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .members {
+      display: grid;
+      gap: 28px;
+    }
+
+    .member {
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 28px;
+      padding: 28px;
+      overflow: hidden;
+      background: var(--paper);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-left: 8px solid var(--teal);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .member:nth-child(2) {
+      border-left-color: var(--coral);
+    }
+
+    .member:nth-child(3) {
+      border-left-color: var(--blue);
+    }
+
+    .photo-wrap {
+      align-self: start;
+      position: sticky;
+      top: 24px;
+    }
+
+    .photo {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 8px;
+      border: 1px solid rgba(31, 41, 51, 0.12);
+      box-shadow: 0 14px 34px rgba(31, 41, 51, 0.14);
+      background: #e7eef0;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .name-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .age {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .contact {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px 16px;
+      margin: 16px 0 22px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact li {
+      display: flex;
+      margin: 0;
+    }
+
+    .contact a {
+      display: flex;
+      align-items: center;
+      min-height: 48px;
+      padding: 0 18px;
+      color: var(--ink);
+      line-height: 1;
+      text-decoration: none;
+      white-space: nowrap;
+      background: rgba(31, 122, 118, 0.09);
+      border: 1px solid rgba(31, 122, 118, 0.18);
+      border-radius: 8px;
+    }
+
+    .member:nth-child(2) .contact a {
+      background: rgba(216, 107, 76, 0.09);
+      border-color: rgba(216, 107, 76, 0.18);
+    }
+
+    .member:nth-child(3) .contact a {
+      background: rgba(47, 95, 159, 0.09);
+      border-color: rgba(47, 95, 159, 0.18);
+    }
+
+    .section {
+      padding-top: 18px;
+      margin-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .section:first-of-type {
+      padding-top: 0;
+      margin-top: 0;
+      border-top: 0;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      color: var(--teal);
+      font-size: 18px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .member:nth-child(2) h3 {
+      color: var(--coral);
+    }
+
+    .member:nth-child(3) h3 {
+      color: var(--blue);
+    }
+
+    p {
+      margin: 0 0 10px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.2em;
+    }
+
+    li+li {
+      margin-top: 8px;
+    }
+
+    .project {
+      margin: 0 0 16px;
+      padding-left: 14px;
+      border-left: 3px solid rgba(31, 122, 118, 0.28);
+    }
+
+    .member:nth-child(2) .project {
+      border-left-color: rgba(216, 107, 76, 0.28);
+    }
+
+    .member:nth-child(3) .project {
+      border-left-color: rgba(47, 95, 159, 0.28);
+    }
+
+    .project-title {
+      margin-bottom: 6px;
+      font-weight: 700;
+      color: #111827;
+    }
+
+    strong {
+      color: #111827;
+    }
+
+    @media (max-width: 820px) {
+      .page {
+        width: min(100% - 24px, 680px);
+        padding-top: 34px;
+      }
+
+      .member {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+
+      .photo-wrap {
+        position: static;
+        max-width: 320px;
+      }
+
+      .name-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">TEAM PROFILE</p>
+      <h1>团队简介</h1>
+      <p class="intro">我们是一支由计算机科学、数据科学、政治学与新闻学背景成员组成的跨学科团队，成员资料如下。</p>
+    </header>
+
+    <div class="members">
+      <section class="member" aria-labelledby="hjh-name">
+        <div class="photo-wrap">
+          <img class="photo" src="iamge/hjh.jpg" alt="贺俊豪照片">
+        </div>
+        <div class="content">
+          <div class="name-row">
+            <h2 id="hjh-name">贺俊豪</h2>
+            <span class="age">年龄：21</span>
+          </div>
+          <ul class="contact">
+            <li><a href="tel:16638280378">电话：16638280378</a></li>
+            <li><a href="mailto:851627648@qq.com">邮箱：851627648@qq.com</a></li>
+          </ul>
+
+          <div class="section">
+            <h3>教育经历</h3>
+            <p>本科2024.9-至今 就读于华东师范大学 计算机科学与技术学院</p>
+            <p>学业成绩：总均绩：3.72/4.0，专业课均绩3.86/4.0，总绩点专业排名前10%</p>
+            <p>
+              学术荣誉：2026中美青年创客大赛省特等奖；第四届“华数杯”国际大学生数学建模竞赛M奖（一等奖）；第十九届中国大学生计算机设计大赛省三等奖；2026中国国际大学生创新大赛校赛金奖；第七届全国高校计算机能力挑战赛省三等奖。
+            </p>
+          </div>
+
+          <div class="section">
+            <h3>项目经历</h3>
+            <div class="project">
+              <p class="project-title">AdenoGuard——儿童腺样体智能筛查小程序（2026.01-2026.04）</p>
+              <p><strong>依托三甲医院真实数据</strong>，独立负责小程序前端开发。主导产品的 UI/UX 视觉与交互设计，基于微信小程序原生框架 WXML / WXSS / JavaScript / JSON
+                开发前端；并高效对接 FastAPI 后端接口，后端接受到上传的文件后，调用训练好的 AutoGluon 多模态二分类模型进行推理，结合 Swin
+                Transformer、FT-Transformer、MFCC / dBA 特征提取，完成手术建议辅助决策，基于该成果<strong>已申请国家计算机软件著作权</strong>。</p>
+            </div>
+            <div class="project">
+              <p class="project-title">U plus——AI+积极心理学APP(2026.03-至今)</p>
+              <p>前端基于 uni-app / Vue + CSS+ JavaScript构建移动端界面，使用 uniCloud
+                云函数实现后端能力与大模型调用；结合心理学知识库构建轻量级RAG，支持性格优势问答、个性化报告生成与成长任务推荐，荣获 2026 中美青年创客大赛上海赛区决赛特等奖并入围国赛。</p>
+            </div>
+            <div class="project">
+              <p class="project-title">ECNU校园导航系统（2025.05-2025.06）</p>
+              <p>基于 C++ 与 STL 标准容器开发的校园导航系统，利用邻接结构进行图论建模，并编写 I/O 实现对 CSV 文件中校园地点及道路的读取。算法层深度集成了欧拉通路判定、Dijkstra
+                最短路径、最小生成树以及拓扑排序等算法。</p>
+            </div>
+            <div class="project">
+              <p class="project-title">钱途财经——一种财务管理系统（2025.05-2026.04）</p>
+              <p>前端基于 Vue 2 + DHTMLX Suite + Axios + Day.js 开发，并使用 Laravel Mix/Webpack 构建；后端基于 Laravel 8、PHP、MySQL
+                实现。项目包含账套、账户、交易流水、分类管理和收支统计等功能，支持桌面端与移动端访问，并实现了交易文本批量导入、智能分类匹配和权限校验等核心模块。</p>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>技能与证书</h3>
+            <p>语言技能：英语四级证书，英语六级证书，汉字应用水平测试一级（620分）</p>
+            <p>办公技能：熟练使用office办公软件，包括Word，Excel，PPT等</p>
+            <p>专业技能：熟练使用 C++、Python等编程语言,较为熟练地使用 Git 工具。</p>
+          </div>
+
+          <div class="section">
+            <h3>社会实践</h3>
+            <p>参加“师大情，母校行“活动，面向100余名高三学子分享大学生活与备考经验，有效推介学校特色，解答报考疑问</p>
+            <p>积极参与公益实践、劳动任务等多类型课外活动，目前已有志愿时长50+小时。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="member" aria-labelledby="xbh-name">
+        <div class="photo-wrap">
+          <img class="photo" src="iamge/xbh.jpg" alt="徐蓓晗照片">
+        </div>
+        <div class="content">
+          <div class="name-row">
+            <h2 id="xbh-name">徐蓓晗</h2>
+            <span class="age">年龄：19</span>
+          </div>
+          <ul class="contact">
+            <li><a href="tel:15021412372">电话：15021412372</a></li>
+            <li><a href="mailto:10255501407@stu.ecnu.edu.cn">邮箱：10255501407@stu.ecnu.edu.cn</a></li>
+          </ul>
+
+          <div class="section">
+            <h3>教育经历</h3>
+            <p>本科2025.9-至今 就读于华东师范大学 数据科学与工程学院</p>
+            <p>学业成绩：总均绩：4.0/4.0，专业排名前5%</p>
+            <p>学术荣誉：2026美国大学生数学建模竞赛M奖（一等奖）；2026中国国际大学生创新大赛校赛银奖</p>
+          </div>
+
+          <div class="section">
+            <h3>参与经历</h3>
+            <div class="project">
+              <p class="project-title">华为开发者大会 (HDC)（2025.09）</p>
+              <p>交流鸿蒙生态、端侧 AI 及云原生开发等前沿技术，拓宽技术栈边界与工业界视野。</p>
+            </div>
+            <div class="project">
+              <p class="project-title">“AI+”超学科创造营（大夏书院日） | 优秀营员 2026.06.12</p>
+              <p>入选大夏书院“AI+”超学科创造营，围绕人工智能前沿交叉学科进行方案设计。</p>
+            </div>
+            <div class="project">
+              <p class="project-title">AICon 人工智能开发与应用大会（2026.06-26-2026.06-27）</p>
+              <p>深入线下技术分论坛，跟进大模型落地、Agent 开发及前沿 AI算法的行业最佳实践。</p>
+            </div>
+            <p>积极参加各类研讨会，字节Trae on campus、腾讯workbuddy工作坊、腾讯开局一课游戏客户端方向学习</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="member" aria-labelledby="whr-name">
+        <div class="photo-wrap">
+          <img class="photo" src="iamge/whr.jpg" alt="王鹤燃照片">
+        </div>
+        <div class="content">
+          <div class="name-row">
+            <h2 id="whr-name">王鹤燃</h2>
+            <span class="age">年龄：19</span>
+          </div>
+          <ul class="contact">
+            <li><a href="tel:18104419938">电话：18104419938</a></li>
+            <li><a href="mailto:10250730404@stu.ecnu.edu.cn">邮箱：10250730404@stu.ecnu.edu.cn</a></li>
+          </ul>
+
+          <div class="section">
+            <h3>教育经历</h3>
+            <p>本科2025.9-至今 就读于华东师范大学 政治学与新闻学双学位</p>
+            <p>学业成绩优异，在社会研究方法，国际政治概论，法学导论，管理学概论等专业核心课程均为满绩。</p>
+          </div>
+
+          <div class="section">
+            <h3>项目经历</h3>
+            <p>小组合作制作数据新闻《数看上海——年轻人眼中的上海红色场馆什么模样？华师大师生用“数看”给出答案》发表于上观新闻与学习强国平台</p>
+          </div>
+
+          <div class="section">
+            <h3>校园经历</h3>
+            <div class="project">
+              <p class="project-title">华东师范大学校学生会新媒体中心成员</p>
+              <p>承担过除夕主题公众号推文排版，掌握基本的秀米，可画等软件的使用方法;</p>
+              <p>进行过毕业季的街头采访任务，具备基本的新闻写作与采访能力;</p>
+              <p>经过新媒体中心的培训，掌握基本的摄影及短视频拍摄能力，懂得基本的构图，采光，能完成剪辑，简单素材剪辑等工作</p>
+            </div>
+            <div class="project">
+              <p class="project-title">担任院系的团支书</p>
+              <p>牵头策划、落地院系各类团日主题活动，负责方案撰写、现场统筹与落地执行;</p>
+              <p>文书工作:活动收尾完成正式书面总结归档，锤炼公文撰写、复盘总结能力;</p>
+              <p>团队协作:对接班级、团委多方人员，统筹协调资源，具备优秀跨群体沟通、团队协作与任务统筹能力。</p>
+            </div>
+            <div class="project">
+              <p class="project-title">“越南新春年画主题展”优秀讲解员</p>
+              <p>面向学龄前儿童、高校学生、中老年多圈层参观者定制差异化讲解话术，根据受众调整表达逻辑，锻炼临场表达、现场控场与沟通协调能力。</p>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>专业技能</h3>
+            <p>新媒体技术基础:基本掌握摄影，播客制作、实拍短片、AI创意短片等</p>
+            <p>数据新闻工作坊:掌握Flourish、Gephi、Plotdb等数据可视化软件;能够运用爬虫、八爪鱼工具批量抓取采集数据;掌握词频统计、情感分析、话语分析，落地数据整理与可视化输出;</p>
+            <p>社会研究方法:习得广告调研、社会调研实操方法，能够使用SPSS统计分析软件。</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+
+</html>
